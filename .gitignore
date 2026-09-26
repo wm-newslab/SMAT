@@ -1,0 +1,6 @@
+automation_dataset
+coordination_dataset
+.venv
+results
+.DS_Store
+src/__pycache__
