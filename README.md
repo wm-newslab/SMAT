@@ -13,7 +13,7 @@ ranked behaviors produces the greatest decline in detection performance.
 features into behavior representations, weights them with gated attention, and
 pools them for account-level classification using only account-level labels.
 
-![Macro F1 scores after removing account behaviors](results/analysis/combined_50_100_original_styling/f1_macro.png)
+![Macro F1 scores after removing account behaviors](public/f1_macro.png)
 
 **Figure 2: Behavior-removal ablation.** Removing the behaviors that SMAT ranks
 as most important causes the largest macro-$F_1$ degradation across automation
