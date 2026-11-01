@@ -4,3 +4,5 @@ coordination_dataset
 results
 .DS_Store
 src/__pycache__
+logs
+*.csh

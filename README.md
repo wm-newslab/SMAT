@@ -115,10 +115,28 @@ containing `YYYY` in their name may contain matching year-specific partitions
 pipeline combines those partitions into one experiment. You can also supply a
 single campaign directory directly.
 
-Automation combines all dataset directories into one experiment. Coordination
-processes every campaign as an independent experiment. The pipeline reads class
-names from each user's `user_class` field instead of hard-coding them.
+Automation combines all dataset directories into one experiment. Coordination processes every campaign as an independent experiment. 
 
+You can use the files in the scripts directory to prepare the datasets. To obtain the underlying data, please contact the authors of the respective datasets. Our contact information is withheld while the paper is under review. Once the paper is published, users may also contact us directly to request the data.
+
+For now, please refer to the links below to check the dataset formats and request access from the dataset authors. Before running the scripts, organize the data according to the directory structure shown below and update the dataset paths in the scripts to match your local setup.
+
+- automation_dataset
+  - [retraining_data](https://botometer.osome.iu.edu/bot-repository/datasets.html)
+    - astroturf
+      - tweets.jsons.gz
+      - userIds.txt
+    - kevin_feedback
+    - botwiki
+
+- coordination_dataset
+  - [YYYY_MM](https://zenodo.org/records/14189193)
+    - campaign_1
+      - DriversControl/control_driver_users.csv
+      - driver_tweets.csv.gz
+    - campaign_2 
+
+Coordination
 ## Run the complete pipeline
 
 Automation detection on the main dataset:
@@ -127,13 +145,14 @@ Automation detection on the main dataset:
 python3 pipeline.py automation main automation_dataset
 ```
 
+
 Coordination detection on the infoOps dataset:
 
 
 ```bash
 python3 pipeline.py coordination infoOps coordination_dataset    
 ```
-
+    
 Each command runs the entire workflow:
 
 1. Creates the task-specific dataset.
@@ -178,7 +197,7 @@ python -m src.export_segment_rankings
 ```
 
 By default, the script reads every `predictions.csv` below `results/mil` and
-writes one CSV per experiment to `segment_ranking_radataset`. Each output row
+writes one CSV per experiment to `SMAT_dataset`. Each output row
 contains `user_id`, `dataset`, `user_class`, and a JSON-encoded `tweet_ranks`
 list. Every ranked segment includes its rank, attention weight, and tweet IDs.
 

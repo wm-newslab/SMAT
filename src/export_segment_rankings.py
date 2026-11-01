@@ -1,4 +1,4 @@
-"""Export tweet-ID segments ranked by MIL attention weight."""
+"""Export bot and driver tweet-ID segments ranked by MIL attention weight."""
 
 import argparse
 import csv
@@ -16,6 +16,7 @@ INPUT_FIELDS = (
     "attention_weights",
 )
 OUTPUT_FIELDS = ("user_id", "dataset", "user_class", "tweet_ranks")
+EXPORT_CLASSES = {"bot", "driver"}
 
 
 def allow_large_csv_fields():
@@ -99,6 +100,8 @@ def export_file(source_path, destination_path):
             writer = csv.DictWriter(destination, fieldnames=OUTPUT_FIELDS)
             writer.writeheader()
             for row_number, row in enumerate(reader, start=2):
+                if row["user_class"] not in EXPORT_CLASSES:
+                    continue
                 rankings = rank_segments(row, source_path, row_number)
                 writer.writerow(
                     {
@@ -111,8 +114,6 @@ def export_file(source_path, destination_path):
                     }
                 )
                 row_count += 1
-        if row_count == 0:
-            raise ValueError(f"CSV is empty: {source_path}")
         temporary_path.replace(destination_path)
     except Exception:
         temporary_path.unlink(missing_ok=True)
@@ -134,7 +135,8 @@ def export_all(input_dir, output_dir):
 def parse_arguments():
     parser = argparse.ArgumentParser(
         description=(
-            "Rank each user's tweet-ID segments by descending MIL attention weight."
+            "Rank bot and driver users' tweet-ID segments by descending MIL "
+            "attention weight."
         )
     )
     parser.add_argument(
@@ -146,7 +148,7 @@ def parse_arguments():
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=Path("segment_ranking_radataset"),
+        default=Path("SMAT_dataset"),
         help="ranking CSV directory (default: segment_ranking_radataset)",
     )
     args = parser.parse_args()
