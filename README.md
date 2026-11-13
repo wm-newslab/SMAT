@@ -113,13 +113,9 @@ each child campaign as an independent experiment. Campaign directories
 containing `YYYY` in their name may contain matching year-specific partitions
 (for example, `CNHU_0621_YYYY/CNHU_0621_2020` and `CNHU_0621_2021`); the
 pipeline combines those partitions into one experiment. You can also supply a
-single campaign directory directly.
+single campaign directory directly. Automation combines all dataset directories into one experiment. Coordination processes every campaign as an independent experiment. 
 
-Automation combines all dataset directories into one experiment. Coordination processes every campaign as an independent experiment. 
-
-You can use the files in the scripts directory to prepare the datasets. To obtain the underlying data, please contact the authors of the respective datasets. Our contact information is withheld while the paper is under review. Once the paper is published, users may also contact us directly to request the data.
-
-For now, please refer to the links below to check the dataset formats and request access from the dataset authors. Before running the scripts, organize the data according to the directory structure shown below and update the dataset paths in the scripts to match your local setup.
+You can use the files in the scripts directory to prepare the datasets. For now, please refer to the links below to check the dataset formats and request access from the dataset authors. User tweet IDs are provided in the links; however, to obtain the corresponding tweet details, please contact the authors of the respective datasets.  Our contact information is withheld while the paper is under review. Once the paper is published, users may also contact us directly to request the data. Before running the scripts, organize the data according to the directory structure shown below and update the dataset paths in the scripts to match your local setup.
 
 - automation_dataset
   - [retraining_data](https://botometer.osome.iu.edu/bot-repository/datasets.html)
